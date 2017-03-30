@@ -122,7 +122,11 @@ namespace Steganography
         {
             try
             {
-                autocorrelation.Run();
+                //autocorrelation.Run();
+                int[] niz = { 19, -1, 11, -9, -7, 13, -15, 5 };
+                niz = Enumerable.Range(0, 1024*2*2*2*2*2*2).ToArray();
+                int[] res =  autocorrelation.fwhd(niz.Length, niz);
+                int l=5;
             }
             catch(Exception ex)
             {
