@@ -36,7 +36,7 @@ namespace Steganography
                     //Ucitavanje bytova slike
                     for (int j = 0; j < arrayWidth; j++)
                         byteArrayOffImage[j] = ByteFromImage(bitmap);
-                    imageAutocor[i] = Autocorrelation(byteArrayOffImage);
+                    imageAutocor[i] = CalcAutocorrelation(byteArrayOffImage);
                 }
 
                 arrayWidth = Convert.ToInt32(Math.Ceiling(Math.Log(compareBitmap.Width * 3, 2)));
@@ -49,7 +49,7 @@ namespace Steganography
                 {
                     for (int j = 0; j < arrayWidth; j++)
                         byteArrayOffImage[j] = ByteFromImage(compareBitmap);
-                    compareAutocor[i] = Autocorrelation(byteArrayOffImage);
+                    compareAutocor[i] = CalcAutocorrelation(byteArrayOffImage);
                 }
 
                 //TODO: Ovde iskoristiti podatke i nacrtati grafik 
@@ -101,7 +101,7 @@ namespace Steganography
             return b;
         }
 
-        public int[] Autocorrelation(Byte[] bytes)
+        public int[] CalcAutocorrelation(Byte[] bytes)
         {
             return null;
         }

@@ -70,10 +70,7 @@
             this.CompareImagePath_AutocorrelationGroup = new System.Windows.Forms.GroupBox();
             this.CompareImagePath_AutocorrelationTextBox = new System.Windows.Forms.TextBox();
             this.CompareImagePath_AutocorrelationTextButton = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.tab.SuspendLayout();
             this.tab_Pack.SuspendLayout();
             this.FilePath_PackGroup.SuspendLayout();
@@ -92,7 +89,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.Image_Autocorrelation)).BeginInit();
             this.ImagePath_AutocorrelationGroup.SuspendLayout();
             this.CompareImagePath_AutocorrelationGroup.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tab
@@ -528,43 +524,14 @@
             this.CompareImagePath_AutocorrelationTextButton.UseVisualStyleBackColor = false;
             this.CompareImagePath_AutocorrelationTextButton.Click += new System.EventHandler(this.CompareImagePath_AutocorrelationTextButton_Click);
             // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(147, 24);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(238, 21);
-            this.comboBox1.TabIndex = 22;
-            // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.comboBox1);
             this.groupBox2.Location = new System.Drawing.Point(6, 312);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(391, 173);
             this.groupBox2.TabIndex = 23;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Graphic card";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(124, 13);
-            this.label1.TabIndex = 23;
-            this.label1.Text = "Graphic card to use:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 57);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 13);
-            this.label2.TabIndex = 24;
-            this.label2.Text = "Number of cores:";
+            this.groupBox2.Text = "Graphic card info";
             // 
             // MainForm
             // 
@@ -604,8 +571,6 @@
             this.ImagePath_AutocorrelationGroup.PerformLayout();
             this.CompareImagePath_AutocorrelationGroup.ResumeLayout(false);
             this.CompareImagePath_AutocorrelationGroup.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -648,9 +613,6 @@
         private System.Windows.Forms.PictureBox CompareImage_Autocorrelation;
         private System.Windows.Forms.PictureBox Image_Autocorrelation;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.GroupBox CompareImagePath_AutocorrelationGroup;
         private System.Windows.Forms.TextBox CompareImagePath_AutocorrelationTextBox;
         private System.Windows.Forms.Button CompareImagePath_AutocorrelationTextButton;
