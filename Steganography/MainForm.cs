@@ -127,12 +127,7 @@ namespace Steganography
             String imagePath = this.ImagePath_AutocorrelationTextBox.Text;
             String compareImagePath = this.CompareImagePath_AutocorrelationTextBox.Text;
 
-            //autocorrelation.Calculate(imagePath, compareImagePath);
-            Random randNum = new Random();
-            int[] test1 = Enumerable.Repeat(0, 1000).Select(i => randNum.Next(90, 100)).ToArray();
-            int[] test2 = Enumerable.Repeat(0, 1000).Select(i => randNum.Next(70, 80)).ToArray();
-            Form chart = new Chart(test1, test2);
-            DialogResult result = chart.ShowDialog();
+            autocorrelation.Calculate(imagePath, compareImagePath);
         }
 
         //Select image for autocorrelation button

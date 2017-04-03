@@ -18,15 +18,12 @@ namespace Steganography
 
         }
 
-        public Chart(int[] firstDataSet, int[] secondDataSet)
+        public Chart(int[] dataSet)
         {
             InitializeComponent();
 
-            for (int i = 0; i < firstDataSet.Length; i++)
-                Chart_Autocorrelation.Series[0].Points.AddY(firstDataSet[i]);
-
-            for (int i = 0; i < secondDataSet.Length; i++)
-                Chart_Autocorrelation.Series[1].Points.AddY(secondDataSet[i]);
+            for (int i = 0; i < dataSet.Length; i++)
+                Chart_Autocorrelation.Series[0].Points.AddY(dataSet[i]);
         }
     }
 }

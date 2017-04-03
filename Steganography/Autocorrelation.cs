@@ -8,12 +8,13 @@ using Alea.Parallel;
 using Alea.CSharp;
 using System.Collections;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace Steganography
 {
     public class Autocorrelation
     {
-        private int bitIndex;
+        private int byteIndex;
 
         public void Calculate(String imagePath, String compareImagePath)
         { 
@@ -21,41 +22,42 @@ namespace Steganography
             {
                 //Ucitavanje bitmapa
                 Bitmap bitmap = new Bitmap(imagePath);
-                Bitmap compareBitmap = new Bitmap(compareImagePath);
+                //Bitmap compareBitmap = new Bitmap(compareImagePath);
                 
                 //Alokacija niza bajtova
-                int arrayWidth = Convert.ToInt32(Math.Ceiling(Math.Log(bitmap.Width * 3, 2)));
+                int arrayLevel = Convert.ToInt32(Math.Ceiling(Math.Log(bitmap.Width * 3, 2)));
+                int arrayWidth = Convert.ToInt32(Math.Pow(2, arrayLevel));
 
-                Byte[] byteArrayOffImage = new Byte[arrayWidth];
+                int[] byteArrayOffImage = new int[arrayWidth];
 
                 //Preracunavanje autokorelacije prve slike
-                int[][] imageAutocor = new int[bitmap.Height][];
-                bitIndex = 0;
+                int[] imageAutocor = new int[bitmap.Height * arrayWidth];
+                byteIndex = 0;
                 for (int i = 0; i < bitmap.Height; i++)
                 {
                     //Ucitavanje bytova slike
-                    for (int j = 0; j < arrayWidth; j++)
+                    for (int j = 0; j < bitmap.Width * 3; j++)
                         byteArrayOffImage[j] = ByteFromImage(bitmap);
-                    imageAutocor[i] = CalcAutocorrelation(byteArrayOffImage);
+                    CalcAutocorrelation(byteArrayOffImage).CopyTo(imageAutocor, byteArrayOffImage.Length * i);
                 }
 
-                arrayWidth = Convert.ToInt32(Math.Ceiling(Math.Log(compareBitmap.Width * 3, 2)));
-                byteArrayOffImage = new Byte[arrayWidth];
+                /* arrayWidth = Convert.ToInt32(Math.Ceiling(Math.Log(compareBitmap.Width * 3, 2)));
 
-                //Preracunavanje autokorelacije druge slike
-                int[][] compareAutocor = new int[compareBitmap.Height][];
-                bitIndex = 0;
-                for (int i = 0; i < compareBitmap.Height; i++)
-                {
-                    for (int j = 0; j < arrayWidth; j++)
-                        byteArrayOffImage[j] = ByteFromImage(compareBitmap);
-                    compareAutocor[i] = CalcAutocorrelation(byteArrayOffImage);
-                }
+                 //Preracunavanje autokorelacije druge slike
+                 int[] compareAutocor = new int[compareBitmap.Height * arrayWidth];
+                 bitIndex = 0;
+                 for (int i = 0; i < compareBitmap.Height; i++)
+                 {
+                     for (int j = 0; j < arrayWidth; j++)
+                         byteArrayOffImage[j] = ByteFromImage(compareBitmap);
+                     compareAutocor.Concat(CalcAutocorrelation(byteArrayOffImage));
+                 }*/
 
-                //TODO: Ovde iskoristiti podatke i nacrtati grafik 
+                Form chart = new Chart(imageAutocor);
+                DialogResult result = chart.ShowDialog();
 
                 bitmap.Dispose();
-                compareBitmap.Dispose();
+                //compareBitmap.Dispose();
             }
             catch(Exception ex)
             {
@@ -74,50 +76,57 @@ namespace Steganography
 
             var gpu = Gpu.Default;
             // Fast Walsh Hadamard Transform.
-            //int i, j, s;
-            //for (i = n>>1; i > 0; i >>= 1)
-
-            //{
-            //    for (j = 0; j < n; j++)
-            //    {
-            //        s = j / i % 2;
-
-            //        b[j] = a[(s == 1 ? -i : 0) + j] + (s == 1 ? -1 : 1) * a[(s == 1 ? 0 : i) + j];
-            //    }
-            //    tmp = a;
-            //    a = b;
-            //    b = tmp;
-            //}
-            int i, s;
-            for (i = n; i > 0; i >>= 1)
+            int i, j, s;
+            for (i = n >> 1; i > 0; i >>= 1)
             {
-                gpu.For(0, n, j => b[j] = a[((j / i % 2) == 1 ? -i : 0) + j] + ((j / i % 2) == 1 ? -1 : 1) * a[((j / i % 2) == 1 ? 0 : i) + j]);
+                for (j = 0; j < n; j++)
+                {
+                    s = j / i % 2;
 
+                    b[j] = a[(s == 1 ? -i : 0) + j] + (s == 1 ? -1 : 1) * a[(s == 1 ? 0 : i) + j];
+                }
                 tmp = a;
                 a = b;
                 b = tmp;
             }
+            //int i, s;
+            //for (i = n; i > 0; i >>= 1)
+            //{
+            //    gpu.For(0, n, j => b[j] = a[((j / i % 2) == 1 ? -i : 0) + j] + ((j / i % 2) == 1 ? -1 : 1) * a[((j / i % 2) == 1 ? 0 : i) + j]);
 
-            return b;
+            //    tmp = a;
+            //    a = b;
+            //    b = tmp;
+            //}
+
+            return a;
         }
 
-        public int[] CalcAutocorrelation(Byte[] bytes)
+        private int[] CalcAutocorrelation(int[] bytes)
         {
-            return null;
+            int[] rezfir = fwhd(bytes.Length, bytes);
+            for (int i = 0; i < rezfir.Length; i++)
+                rezfir[i] = rezfir[i] * rezfir[i];
+            int[] rezsq = fwhd(rezfir.Length, rezfir);
+
+            int level = Convert.ToInt32(Math.Pow(2, Math.Log(bytes.Length, 2)));
+            for (int i = 0; i < rezsq.Length; i++)
+                rezsq[i] = rezsq[i] * level;
+            return rezsq;
         }
 
-        private Byte ByteFromImage(Bitmap bitmap)
+        private int ByteFromImage(Bitmap bitmap)
         {
             Byte result = 0;
             int x, y;
             for (int i = 0; i < 8; i++)
             {
-                x = (bitIndex / 3) % bitmap.Width;
-                y = (bitIndex / 3) / bitmap.Width;
+                x = (byteIndex / 3) % bitmap.Width;
+                y = (byteIndex / 3) / bitmap.Width;
                 Color pixel = bitmap.GetPixel(x, y);
 
                 //Ekstrakcija bitova
-                switch (bitIndex % 3)
+                switch (byteIndex % 3)
                 {
                     //R
                     case 0:
@@ -132,9 +141,9 @@ namespace Steganography
                         result = Convert.ToByte(result | (((Convert.ToUInt32(pixel.B)) << 31) >> (24 + i)));
                         break;
                 }
-                bitIndex++;
             }
-            return result;
+            byteIndex++;
+            return Convert.ToInt32(result);
         }
     }
 }
