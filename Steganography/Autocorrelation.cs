@@ -7,18 +7,55 @@ using Alea;
 using Alea.Parallel;
 using Alea.CSharp;
 using System.Collections;
+using System.Drawing;
 
 namespace Steganography
 {
     public class Autocorrelation
     {
-        [GpuManaged]
-        public void Run()
-        {
+        private int bitIndex;
+
+        public void Calculate(String imagePath, String compareImagePath)
+        { 
             try
             {
-                var gpu = Gpu.Default;
-                var gpus = Device.Devices;
+                //Ucitavanje bitmapa
+                Bitmap bitmap = new Bitmap(imagePath);
+                Bitmap compareBitmap = new Bitmap(compareImagePath);
+                
+                //Alokacija niza bajtova
+                int arrayWidth = Convert.ToInt32(Math.Ceiling(Math.Log(bitmap.Width * 3, 2)));
+
+                Byte[] byteArrayOffImage = new Byte[arrayWidth];
+
+                //Preracunavanje autokorelacije prve slike
+                int[][] imageAutocor = new int[bitmap.Height][];
+                bitIndex = 0;
+                for (int i = 0; i < bitmap.Height; i++)
+                {
+                    //Ucitavanje bytova slike
+                    for (int j = 0; j < arrayWidth; j++)
+                        byteArrayOffImage[j] = ByteFromImage(bitmap);
+                    imageAutocor[i] = Autocorrelation(byteArrayOffImage);
+                }
+
+                arrayWidth = Convert.ToInt32(Math.Ceiling(Math.Log(compareBitmap.Width * 3, 2)));
+                byteArrayOffImage = new Byte[arrayWidth];
+
+                //Preracunavanje autokorelacije druge slike
+                int[][] compareAutocor = new int[compareBitmap.Height][];
+                bitIndex = 0;
+                for (int i = 0; i < compareBitmap.Height; i++)
+                {
+                    for (int j = 0; j < arrayWidth; j++)
+                        byteArrayOffImage[j] = ByteFromImage(compareBitmap);
+                    compareAutocor[i] = Autocorrelation(byteArrayOffImage);
+                }
+
+                //TODO: Ovde iskoristiti podatke i nacrtati grafik 
+
+                bitmap.Dispose();
+                compareBitmap.Dispose();
             }
             catch(Exception ex)
             {
@@ -62,6 +99,42 @@ namespace Steganography
             }
 
             return b;
+        }
+
+        public int[] Autocorrelation(Byte[] bytes)
+        {
+            return null;
+        }
+
+        private Byte ByteFromImage(Bitmap bitmap)
+        {
+            Byte result = 0;
+            int x, y;
+            for (int i = 0; i < 8; i++)
+            {
+                x = (bitIndex / 3) % bitmap.Width;
+                y = (bitIndex / 3) / bitmap.Width;
+                Color pixel = bitmap.GetPixel(x, y);
+
+                //Ekstrakcija bitova
+                switch (bitIndex % 3)
+                {
+                    //R
+                    case 0:
+                        result = Convert.ToByte(result | (((Convert.ToUInt32(pixel.R)) << 31) >> (24 + i)));
+                        break;
+                    //G
+                    case 1:
+                        result = Convert.ToByte(result | (((Convert.ToUInt32(pixel.G)) << 31) >> (24 + i)));
+                        break;
+                    //B
+                    case 2:
+                        result = Convert.ToByte(result | (((Convert.ToUInt32(pixel.B)) << 31) >> (24 + i)));
+                        break;
+                }
+                bitIndex++;
+            }
+            return result;
         }
     }
 }

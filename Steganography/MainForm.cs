@@ -31,6 +31,7 @@ namespace Steganography
             this.Button_Pack.Enabled = false;
             this.Button_Unpack.Visible = false;
             this.GroupBox_UnpackInfo.Enabled = false;
+
         }
 
         #region Buttons
@@ -61,10 +62,14 @@ namespace Steganography
             {
                 this.ImagePath_PackTextBox.Text = filePath.FileName;
                 Image image = Image.FromStream(new MemoryStream(File.ReadAllBytes(filePath.FileName)));
+
+                this.Image_Before.Image.Dispose();
                 this.Image_Before.Image = image;
+
                 this.Label_PackImageSizeValue.Text = image.Width.ToString() + "x" + image.Height.ToString();
                 this.Label_PackAvailableSpaceValue.Text = (((float)(image.Width * image.Height * 3 / 8)) / 1024).ToString("0.00") + " KB";
                 this.Image_Before.SizeMode = PictureBoxSizeMode.Zoom;
+
                 this.Image_After.Image = Resources.imgphw;
 
                 //Posto je slika izabrana omogucavam biranje fajla
@@ -85,7 +90,6 @@ namespace Steganography
                 this.FilePath_PackTextBox.Text = filePath.FileName;
                 long fileSize = new FileInfo(filePath.FileName).Length;
                 this.Label_PackFileSizeValue.Text = (fileSize + 30).ToString() + " B";
-                //TODO: Treba dodati u velicinu fajla i ekstenziju koju upisujem i to dodati u CheckIfPack funkciji
                 CheckIfPackIsPosible();
             }
         }
@@ -120,17 +124,42 @@ namespace Steganography
         //Preracunavanje autokorelacije
         private void Button_Calculate_Click(object sender, EventArgs e)
         {
-            try
+            String imagePath = this.ImagePath_AutocorrelationTextBox.Text;
+            String compareImagePath = this.CompareImagePath_AutocorrelationTextBox.Text;
+
+            autocorrelation.Calculate(imagePath, compareImagePath);
+        }
+
+        //Select image for autocorrelation button
+        private void ImagePath_AutocorrelationTextButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog filePath = new OpenFileDialog();
+            filePath.Filter = "PNG (*.png)|*.png|BMP (*.bmp)|*.bmp";
+            DialogResult result = filePath.ShowDialog();
+            if (result == DialogResult.OK)
             {
-                //autocorrelation.Run();
-                int[] niz = { 19, -1, 11, -9, -7, 13, -15, 5 };
-                niz = Enumerable.Range(0, 1024*2*2*2*2*2*2).ToArray();
-                int[] res =  autocorrelation.fwhd(niz.Length, niz);
-                int l=5;
+                this.ImagePath_AutocorrelationTextBox.Text = filePath.FileName;
+                Image image = Image.FromStream(new MemoryStream(File.ReadAllBytes(filePath.FileName)));
+                this.Image_Autocorrelation.Image.Dispose();
+                this.Image_Autocorrelation.Image = image;
+                this.Image_Autocorrelation.SizeMode = PictureBoxSizeMode.Zoom;
+                this.CompareImage_Autocorrelation.Image = Resources.imgphw;
+
             }
-            catch(Exception ex)
+        }
+
+        //Select compare image for autocorrelation button
+        private void CompareImagePath_AutocorrelationTextButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog filePath = new OpenFileDialog();
+            filePath.Filter = "PNG (*.png)|*.png|BMP (*.bmp)|*.bmp";
+            DialogResult result = filePath.ShowDialog();
+            if (result == DialogResult.OK)
             {
-                MessageBox.Show(ex.Message);
+                this.CompareImagePath_AutocorrelationTextBox.Text = filePath.FileName;
+                Image image = Image.FromStream(new MemoryStream(File.ReadAllBytes(filePath.FileName)));
+                this.CompareImage_Autocorrelation.Image = image;
+                this.CompareImage_Autocorrelation.SizeMode = PictureBoxSizeMode.Zoom;
             }
         }
         #endregion
@@ -159,12 +188,19 @@ namespace Steganography
             this.Label_UnpackImagePackedVal.Text = "-";
             this.Button_Unpack.Visible = false;
             this.GroupBox_UnpackInfo.Enabled = false;
+            this.Image_UnpackSource.Dispose();
+            this.Image_UnpackSource.Image = Resources.imgphw;
         }
 
         public void PackFinished(String afterImagePath)
         {
             Image image = Image.FromStream(new MemoryStream(File.ReadAllBytes(afterImagePath)));
             this.Image_After.Image = image;
+        }
+
+        public void AutocorrelationFinished()
+        {
+
         }
         #endregion
     }

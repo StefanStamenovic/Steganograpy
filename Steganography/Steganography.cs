@@ -88,6 +88,7 @@ namespace Steganography
 
                 dataFile.Close();
                 bitmap.Save(destinationPath);
+                bitmap.Dispose();
             }
             catch (Exception e)
             {
@@ -182,6 +183,7 @@ namespace Steganography
                     outputFile.WriteByte(UnpackByteFromImage(bitmap));
 
                 outputFile.Close();
+                bitmap.Dispose();
             }
             catch (Exception e)
             {

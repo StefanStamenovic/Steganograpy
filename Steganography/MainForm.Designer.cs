@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tab = new System.Windows.Forms.TabControl();
+            this.tab_Pack = new System.Windows.Forms.TabPage();
             this.FilePath_PackGroup = new System.Windows.Forms.GroupBox();
             this.FilePath_PackTextBox = new System.Windows.Forms.TextBox();
             this.FilePath_PackButton = new System.Windows.Forms.Button();
@@ -51,7 +51,7 @@
             this.ImagePath_PackGroup = new System.Windows.Forms.GroupBox();
             this.ImagePath_PackTextBox = new System.Windows.Forms.TextBox();
             this.ImagePath_PackTextButton = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tab_Unpack = new System.Windows.Forms.TabPage();
             this.ImagePath_UnpackGroup = new System.Windows.Forms.GroupBox();
             this.ImagePath_UnpackTextBox = new System.Windows.Forms.TextBox();
             this.ImagePath_UnpackTextButton = new System.Windows.Forms.Button();
@@ -60,12 +60,22 @@
             this.Label_UnpackImagePacked = new System.Windows.Forms.Label();
             this.Label_UnpackImagePackedVal = new System.Windows.Forms.Label();
             this.Image_UnpackSource = new System.Windows.Forms.PictureBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.tab_Autocorrelation = new System.Windows.Forms.TabPage();
             this.Button_Calculate = new System.Windows.Forms.Button();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.CompareImage_Autocorrelation = new System.Windows.Forms.PictureBox();
+            this.Image_Autocorrelation = new System.Windows.Forms.PictureBox();
+            this.ImagePath_AutocorrelationGroup = new System.Windows.Forms.GroupBox();
+            this.ImagePath_AutocorrelationTextBox = new System.Windows.Forms.TextBox();
+            this.ImagePath_AutocorrelationTextButton = new System.Windows.Forms.Button();
+            this.CompareImagePath_AutocorrelationGroup = new System.Windows.Forms.GroupBox();
+            this.CompareImagePath_AutocorrelationTextBox = new System.Windows.Forms.TextBox();
+            this.CompareImagePath_AutocorrelationTextButton = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tab.SuspendLayout();
+            this.tab_Pack.SuspendLayout();
             this.FilePath_PackGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Image_After)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Image_Before)).BeginInit();
@@ -73,41 +83,44 @@
             this.GroupBox_PackImageInfo.SuspendLayout();
             this.GroupBox_PackFileInfo.SuspendLayout();
             this.ImagePath_PackGroup.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tab_Unpack.SuspendLayout();
             this.ImagePath_UnpackGroup.SuspendLayout();
             this.GroupBox_UnpackInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Image_UnpackSource)).BeginInit();
-            this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.tab_Autocorrelation.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CompareImage_Autocorrelation)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Image_Autocorrelation)).BeginInit();
+            this.ImagePath_AutocorrelationGroup.SuspendLayout();
+            this.CompareImagePath_AutocorrelationGroup.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // tab
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(14, 12);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(413, 546);
-            this.tabControl1.TabIndex = 1;
+            this.tab.Controls.Add(this.tab_Pack);
+            this.tab.Controls.Add(this.tab_Unpack);
+            this.tab.Controls.Add(this.tab_Autocorrelation);
+            this.tab.Location = new System.Drawing.Point(14, 12);
+            this.tab.Name = "tab";
+            this.tab.SelectedIndex = 0;
+            this.tab.Size = new System.Drawing.Size(413, 546);
+            this.tab.TabIndex = 1;
             // 
-            // tabPage1
+            // tab_Pack
             // 
-            this.tabPage1.Controls.Add(this.FilePath_PackGroup);
-            this.tabPage1.Controls.Add(this.Image_After);
-            this.tabPage1.Controls.Add(this.Image_Before);
-            this.tabPage1.Controls.Add(this.Button_Pack);
-            this.tabPage1.Controls.Add(this.GroupBox_PackInfo);
-            this.tabPage1.Controls.Add(this.ImagePath_PackGroup);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(405, 520);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Pack";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tab_Pack.Controls.Add(this.FilePath_PackGroup);
+            this.tab_Pack.Controls.Add(this.Image_After);
+            this.tab_Pack.Controls.Add(this.Image_Before);
+            this.tab_Pack.Controls.Add(this.Button_Pack);
+            this.tab_Pack.Controls.Add(this.GroupBox_PackInfo);
+            this.tab_Pack.Controls.Add(this.ImagePath_PackGroup);
+            this.tab_Pack.Location = new System.Drawing.Point(4, 22);
+            this.tab_Pack.Name = "tab_Pack";
+            this.tab_Pack.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_Pack.Size = new System.Drawing.Size(405, 520);
+            this.tab_Pack.TabIndex = 0;
+            this.tab_Pack.Text = "Pack";
+            this.tab_Pack.UseVisualStyleBackColor = true;
             // 
             // FilePath_PackGroup
             // 
@@ -311,19 +324,19 @@
             this.ImagePath_PackTextButton.UseVisualStyleBackColor = false;
             this.ImagePath_PackTextButton.Click += new System.EventHandler(this.ImagePath_PackTextButton_Click);
             // 
-            // tabPage2
+            // tab_Unpack
             // 
-            this.tabPage2.Controls.Add(this.ImagePath_UnpackGroup);
-            this.tabPage2.Controls.Add(this.Button_Unpack);
-            this.tabPage2.Controls.Add(this.GroupBox_UnpackInfo);
-            this.tabPage2.Controls.Add(this.Image_UnpackSource);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(405, 520);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Unpack";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tab_Unpack.Controls.Add(this.ImagePath_UnpackGroup);
+            this.tab_Unpack.Controls.Add(this.Button_Unpack);
+            this.tab_Unpack.Controls.Add(this.GroupBox_UnpackInfo);
+            this.tab_Unpack.Controls.Add(this.Image_UnpackSource);
+            this.tab_Unpack.Location = new System.Drawing.Point(4, 22);
+            this.tab_Unpack.Name = "tab_Unpack";
+            this.tab_Unpack.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_Unpack.Size = new System.Drawing.Size(405, 520);
+            this.tab_Unpack.TabIndex = 1;
+            this.tab_Unpack.Text = "Unpack";
+            this.tab_Unpack.UseVisualStyleBackColor = true;
             // 
             // ImagePath_UnpackGroup
             // 
@@ -406,38 +419,21 @@
             this.Image_UnpackSource.TabIndex = 2;
             this.Image_UnpackSource.TabStop = false;
             // 
-            // tabPage3
+            // tab_Autocorrelation
             // 
-            this.tabPage3.Controls.Add(this.Button_Calculate);
-            this.tabPage3.Controls.Add(this.pictureBox1);
-            this.tabPage3.Controls.Add(this.pictureBox2);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(405, 520);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Autocorrelation";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::Steganography.Properties.Resources.imgphw;
-            this.pictureBox1.Location = new System.Drawing.Point(205, 6);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(192, 192);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 18;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::Steganography.Properties.Resources.imgphw;
-            this.pictureBox2.Location = new System.Drawing.Point(7, 6);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(192, 192);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 17;
-            this.pictureBox2.TabStop = false;
+            this.tab_Autocorrelation.Controls.Add(this.groupBox2);
+            this.tab_Autocorrelation.Controls.Add(this.CompareImagePath_AutocorrelationGroup);
+            this.tab_Autocorrelation.Controls.Add(this.ImagePath_AutocorrelationGroup);
+            this.tab_Autocorrelation.Controls.Add(this.Button_Calculate);
+            this.tab_Autocorrelation.Controls.Add(this.CompareImage_Autocorrelation);
+            this.tab_Autocorrelation.Controls.Add(this.Image_Autocorrelation);
+            this.tab_Autocorrelation.Location = new System.Drawing.Point(4, 22);
+            this.tab_Autocorrelation.Name = "tab_Autocorrelation";
+            this.tab_Autocorrelation.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_Autocorrelation.Size = new System.Drawing.Size(405, 520);
+            this.tab_Autocorrelation.TabIndex = 2;
+            this.tab_Autocorrelation.Text = "Autocorrelation";
+            this.tab_Autocorrelation.UseVisualStyleBackColor = true;
             // 
             // Button_Calculate
             // 
@@ -450,20 +446,140 @@
             this.Button_Calculate.UseVisualStyleBackColor = false;
             this.Button_Calculate.Click += new System.EventHandler(this.Button_Calculate_Click);
             // 
+            // CompareImage_Autocorrelation
+            // 
+            this.CompareImage_Autocorrelation.Image = global::Steganography.Properties.Resources.imgphw;
+            this.CompareImage_Autocorrelation.Location = new System.Drawing.Point(205, 6);
+            this.CompareImage_Autocorrelation.Name = "CompareImage_Autocorrelation";
+            this.CompareImage_Autocorrelation.Size = new System.Drawing.Size(192, 192);
+            this.CompareImage_Autocorrelation.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.CompareImage_Autocorrelation.TabIndex = 18;
+            this.CompareImage_Autocorrelation.TabStop = false;
+            // 
+            // Image_Autocorrelation
+            // 
+            this.Image_Autocorrelation.Image = global::Steganography.Properties.Resources.imgphw;
+            this.Image_Autocorrelation.Location = new System.Drawing.Point(7, 6);
+            this.Image_Autocorrelation.Name = "Image_Autocorrelation";
+            this.Image_Autocorrelation.Size = new System.Drawing.Size(192, 192);
+            this.Image_Autocorrelation.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.Image_Autocorrelation.TabIndex = 17;
+            this.Image_Autocorrelation.TabStop = false;
+            // 
+            // ImagePath_AutocorrelationGroup
+            // 
+            this.ImagePath_AutocorrelationGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ImagePath_AutocorrelationGroup.Controls.Add(this.ImagePath_AutocorrelationTextBox);
+            this.ImagePath_AutocorrelationGroup.Controls.Add(this.ImagePath_AutocorrelationTextButton);
+            this.ImagePath_AutocorrelationGroup.Location = new System.Drawing.Point(7, 204);
+            this.ImagePath_AutocorrelationGroup.Name = "ImagePath_AutocorrelationGroup";
+            this.ImagePath_AutocorrelationGroup.Size = new System.Drawing.Size(335, 48);
+            this.ImagePath_AutocorrelationGroup.TabIndex = 20;
+            this.ImagePath_AutocorrelationGroup.TabStop = false;
+            this.ImagePath_AutocorrelationGroup.Text = "Image";
+            // 
+            // ImagePath_AutocorrelationTextBox
+            // 
+            this.ImagePath_AutocorrelationTextBox.Location = new System.Drawing.Point(7, 19);
+            this.ImagePath_AutocorrelationTextBox.Name = "ImagePath_AutocorrelationTextBox";
+            this.ImagePath_AutocorrelationTextBox.ReadOnly = true;
+            this.ImagePath_AutocorrelationTextBox.Size = new System.Drawing.Size(280, 21);
+            this.ImagePath_AutocorrelationTextBox.TabIndex = 6;
+            // 
+            // ImagePath_AutocorrelationTextButton
+            // 
+            this.ImagePath_AutocorrelationTextButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ImagePath_AutocorrelationTextButton.Location = new System.Drawing.Point(295, 19);
+            this.ImagePath_AutocorrelationTextButton.Name = "ImagePath_AutocorrelationTextButton";
+            this.ImagePath_AutocorrelationTextButton.Size = new System.Drawing.Size(29, 23);
+            this.ImagePath_AutocorrelationTextButton.TabIndex = 7;
+            this.ImagePath_AutocorrelationTextButton.Text = "...";
+            this.ImagePath_AutocorrelationTextButton.UseVisualStyleBackColor = false;
+            this.ImagePath_AutocorrelationTextButton.Click += new System.EventHandler(this.ImagePath_AutocorrelationTextButton_Click);
+            // 
+            // CompareImagePath_AutocorrelationGroup
+            // 
+            this.CompareImagePath_AutocorrelationGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CompareImagePath_AutocorrelationGroup.Controls.Add(this.CompareImagePath_AutocorrelationTextBox);
+            this.CompareImagePath_AutocorrelationGroup.Controls.Add(this.CompareImagePath_AutocorrelationTextButton);
+            this.CompareImagePath_AutocorrelationGroup.Location = new System.Drawing.Point(7, 258);
+            this.CompareImagePath_AutocorrelationGroup.Name = "CompareImagePath_AutocorrelationGroup";
+            this.CompareImagePath_AutocorrelationGroup.Size = new System.Drawing.Size(335, 48);
+            this.CompareImagePath_AutocorrelationGroup.TabIndex = 21;
+            this.CompareImagePath_AutocorrelationGroup.TabStop = false;
+            this.CompareImagePath_AutocorrelationGroup.Text = "Image to compare";
+            // 
+            // CompareImagePath_AutocorrelationTextBox
+            // 
+            this.CompareImagePath_AutocorrelationTextBox.Location = new System.Drawing.Point(7, 19);
+            this.CompareImagePath_AutocorrelationTextBox.Name = "CompareImagePath_AutocorrelationTextBox";
+            this.CompareImagePath_AutocorrelationTextBox.ReadOnly = true;
+            this.CompareImagePath_AutocorrelationTextBox.Size = new System.Drawing.Size(280, 21);
+            this.CompareImagePath_AutocorrelationTextBox.TabIndex = 6;
+            // 
+            // CompareImagePath_AutocorrelationTextButton
+            // 
+            this.CompareImagePath_AutocorrelationTextButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.CompareImagePath_AutocorrelationTextButton.Location = new System.Drawing.Point(295, 19);
+            this.CompareImagePath_AutocorrelationTextButton.Name = "CompareImagePath_AutocorrelationTextButton";
+            this.CompareImagePath_AutocorrelationTextButton.Size = new System.Drawing.Size(29, 23);
+            this.CompareImagePath_AutocorrelationTextButton.TabIndex = 7;
+            this.CompareImagePath_AutocorrelationTextButton.Text = "...";
+            this.CompareImagePath_AutocorrelationTextButton.UseVisualStyleBackColor = false;
+            this.CompareImagePath_AutocorrelationTextButton.Click += new System.EventHandler(this.CompareImagePath_AutocorrelationTextButton_Click);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(147, 24);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(238, 21);
+            this.comboBox1.TabIndex = 22;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.comboBox1);
+            this.groupBox2.Location = new System.Drawing.Point(6, 312);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(391, 173);
+            this.groupBox2.TabIndex = 23;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Graphic card";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(8, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(124, 13);
+            this.label1.TabIndex = 23;
+            this.label1.Text = "Graphic card to use:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(11, 57);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(107, 13);
+            this.label2.TabIndex = 24;
+            this.label2.Text = "Number of cores:";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(439, 570);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tab);
             this.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "Steganography";
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.tab.ResumeLayout(false);
+            this.tab_Pack.ResumeLayout(false);
             this.FilePath_PackGroup.ResumeLayout(false);
             this.FilePath_PackGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Image_After)).EndInit();
@@ -475,23 +591,29 @@
             this.GroupBox_PackFileInfo.PerformLayout();
             this.ImagePath_PackGroup.ResumeLayout(false);
             this.ImagePath_PackGroup.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
+            this.tab_Unpack.ResumeLayout(false);
             this.ImagePath_UnpackGroup.ResumeLayout(false);
             this.ImagePath_UnpackGroup.PerformLayout();
             this.GroupBox_UnpackInfo.ResumeLayout(false);
             this.GroupBox_UnpackInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Image_UnpackSource)).EndInit();
-            this.tabPage3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.tab_Autocorrelation.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.CompareImage_Autocorrelation)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Image_Autocorrelation)).EndInit();
+            this.ImagePath_AutocorrelationGroup.ResumeLayout(false);
+            this.ImagePath_AutocorrelationGroup.PerformLayout();
+            this.CompareImagePath_AutocorrelationGroup.ResumeLayout(false);
+            this.CompareImagePath_AutocorrelationGroup.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabControl tab;
+        private System.Windows.Forms.TabPage tab_Pack;
         private System.Windows.Forms.PictureBox Image_After;
         private System.Windows.Forms.PictureBox Image_Before;
         private System.Windows.Forms.Button Button_Pack;
@@ -499,7 +621,7 @@
         private System.Windows.Forms.GroupBox ImagePath_PackGroup;
         private System.Windows.Forms.TextBox ImagePath_PackTextBox;
         private System.Windows.Forms.Button ImagePath_PackTextButton;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tab_Unpack;
         private System.Windows.Forms.PictureBox Image_UnpackSource;
         private System.Windows.Forms.GroupBox FilePath_PackGroup;
         private System.Windows.Forms.TextBox FilePath_PackTextBox;
@@ -521,10 +643,20 @@
         private System.Windows.Forms.Label Label_PackFileStatus_Value;
         private System.Windows.Forms.Label Label_UnpackImagePacked;
         private System.Windows.Forms.Label Label_UnpackImagePackedVal;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tab_Autocorrelation;
         private System.Windows.Forms.Button Button_Calculate;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox CompareImage_Autocorrelation;
+        private System.Windows.Forms.PictureBox Image_Autocorrelation;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.GroupBox CompareImagePath_AutocorrelationGroup;
+        private System.Windows.Forms.TextBox CompareImagePath_AutocorrelationTextBox;
+        private System.Windows.Forms.Button CompareImagePath_AutocorrelationTextButton;
+        private System.Windows.Forms.GroupBox ImagePath_AutocorrelationGroup;
+        private System.Windows.Forms.TextBox ImagePath_AutocorrelationTextBox;
+        private System.Windows.Forms.Button ImagePath_AutocorrelationTextButton;
     }
 }
 
