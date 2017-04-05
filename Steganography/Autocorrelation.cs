@@ -22,7 +22,7 @@ namespace Steganography
             {
                 //Ucitavanje bitmapa
                 Bitmap bitmap = new Bitmap(imagePath);
-                //Bitmap compareBitmap = new Bitmap(compareImagePath);
+                Bitmap compareBitmap = new Bitmap(compareImagePath);
                 
                 //Alokacija niza bajtova
                 int arrayLevel = Convert.ToInt32(Math.Ceiling(Math.Log(bitmap.Width * 3, 2)));
@@ -41,30 +41,38 @@ namespace Steganography
                     CalcAutocorrelation(byteArrayOffImage).CopyTo(imageAutocor, byteArrayOffImage.Length * i);
                 }
 
-                /* arrayWidth = Convert.ToInt32(Math.Ceiling(Math.Log(compareBitmap.Width * 3, 2)));
+                arrayLevel = Convert.ToInt32(Math.Ceiling(Math.Log(compareBitmap.Width * 3, 2)));
+                arrayWidth = Convert.ToInt32(Math.Pow(2, arrayLevel));
 
-                 //Preracunavanje autokorelacije druge slike
-                 int[] compareAutocor = new int[compareBitmap.Height * arrayWidth];
-                 bitIndex = 0;
-                 for (int i = 0; i < compareBitmap.Height; i++)
-                 {
-                     for (int j = 0; j < arrayWidth; j++)
-                         byteArrayOffImage[j] = ByteFromImage(compareBitmap);
-                     compareAutocor.Concat(CalcAutocorrelation(byteArrayOffImage));
-                 }*/
+                //Preracunavanje autokorelacije druge slike
+                int[] compareAutocor = new int[compareBitmap.Height * arrayWidth];
+                byteArrayOffImage = new int[arrayWidth];
+                byteIndex = 0;
+                for (int i = 0; i < compareBitmap.Height; i++)
+                {
+                    for (int j = 0; j < compareBitmap.Width * 3; j++)
+                        byteArrayOffImage[j] = ByteFromImage(compareBitmap);
+                    CalcAutocorrelation(byteArrayOffImage).CopyTo(compareAutocor, byteArrayOffImage.Length * i);
+                }
 
-                Form chart = new Chart(imageAutocor);
+                int[] diff = imageAutocor;
+
+                for (int i = 0; i < imageAutocor.Length; i++)
+                    //diff[i] -= compareAutocor[i];
+                    diff[i] = Math.Abs(diff[i] - compareAutocor[i]);
+
+
+                Form chart = new Chart(diff);
                 DialogResult result = chart.ShowDialog();
 
                 bitmap.Dispose();
-                //compareBitmap.Dispose();
+                compareBitmap.Dispose();
             }
             catch(Exception ex)
             {
-                Console.WriteLine(ex.Message.ToString());
+                MessageBox.Show(ex.Message);
             }
         }
-        [GpuManaged]
         public int[] fwhd(int n , int[]  src)
         {
             
@@ -74,7 +82,6 @@ namespace Steganography
             int[] tmp;
             Array.Copy(src, a, n);
 
-            var gpu = Gpu.Default;
             // Fast Walsh Hadamard Transform.
             int i, j, s;
             for (i = n >> 1; i > 0; i >>= 1)
