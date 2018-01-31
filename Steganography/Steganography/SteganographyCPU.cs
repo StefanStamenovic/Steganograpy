@@ -10,19 +10,19 @@ using System.Windows.Forms;
 
 namespace Steganography
 {
-    class Steganography
+    class SteganographyCPU : ISteganography
     {
         private MainForm mainForm;
         private Thread processingTherad;
 
         private int bitIndex;
 
-        public Steganography(Form form)
+        public SteganographyCPU(Form form)
         {
             mainForm = (MainForm)form;
         }
 
-        ~Steganography()
+        ~SteganographyCPU()
         {
             if (processingTherad != null)
                 processingTherad.Abort();

@@ -1,29 +1,29 @@
-﻿using Steganography.Properties;
+﻿using Steganography.Autocorrelation;
+using Steganography.Nvidia;
+using Steganography.Properties;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Steganography
 {
     public partial class MainForm : Form
     {
-        private Steganography packer;
-        private Autocorrelation autocorrelation;
+        private ISteganography packer;
+        private IAutocorrelation autocorrelation;
+
+        public bool enableCUDA;
 
         public MainForm()
         {
             InitializeComponent();
             Control.CheckForIllegalCrossThreadCalls = false;
 
-            packer = new Steganography(this);
-            autocorrelation = new Autocorrelation();
+            packer = new SteganographyCPU(this);
+            autocorrelation = new AutocorrelationCPU();
+            enableCUDA = false;
 
             //Inicijalno je zakljucano biranje fajla jer ne postoji izabrana slika i pack dugmeta i unpack dugme je sakriveno
             this.FilePath_PackGroup.Enabled = false;
@@ -31,7 +31,8 @@ namespace Steganography
             this.Button_Pack.Enabled = false;
             this.Button_Unpack.Visible = false;
             this.GroupBox_UnpackInfo.Enabled = false;
-
+            if (CudaAPI.CheckIsCudaAvailable())
+                CudaAPI.SetBestDevice();
         }
 
         #region Buttons
@@ -162,6 +163,8 @@ namespace Steganography
                 this.CompareImage_Autocorrelation.SizeMode = PictureBoxSizeMode.Zoom;
             }
         }
+
+        //Chanege processsing to CUDA GPU
         #endregion
 
         #region UI update functions

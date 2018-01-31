@@ -10,9 +10,9 @@ using System.Collections;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Steganography
+namespace Steganography.Autocorrelation
 {
-    public class Autocorrelation
+    public class AutocorrelationCPU : IAutocorrelation
     {
         private int byteIndex;
 
@@ -58,8 +58,8 @@ namespace Steganography
                 int[] diff = imageAutocor;
 
                 for (int i = 0; i < imageAutocor.Length; i++)
-                    //diff[i] -= compareAutocor[i];
-                    diff[i] = Math.Abs(diff[i] - compareAutocor[i]);
+                    diff[i] -= compareAutocor[i];
+                    //diff[i] = Math.Abs(diff[i] - compareAutocor[i]);
 
 
                 Form chart = new Chart(diff);
@@ -75,8 +75,6 @@ namespace Steganography
         }
         public int[] fwhd(int n , int[]  src)
         {
-            
-
             int[] a = new int[n];
             int[] b = new int[n];
             int[] tmp;
@@ -96,15 +94,6 @@ namespace Steganography
                 a = b;
                 b = tmp;
             }
-            //int i, s;
-            //for (i = n; i > 0; i >>= 1)
-            //{
-            //    gpu.For(0, n, j => b[j] = a[((j / i % 2) == 1 ? -i : 0) + j] + ((j / i % 2) == 1 ? -1 : 1) * a[((j / i % 2) == 1 ? 0 : i) + j]);
-
-            //    tmp = a;
-            //    a = b;
-            //    b = tmp;
-            //}
 
             return a;
         }
