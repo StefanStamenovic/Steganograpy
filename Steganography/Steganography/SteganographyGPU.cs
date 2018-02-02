@@ -2,25 +2,54 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Steganography.Steganography
 {
     class SteganographyGPU : ISteganography
     {
-        public bool CheckIsImageHidingData(string imagePath)
+        public SteganographyGPU(Form form)
         {
-            throw new NotImplementedException();
+            mainForm = (MainForm)form;
         }
 
-        public void Pack(string imagePath, string filePath)
+        public override bool CheckIsImageHidingData(string imagePath)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return false;
+            }
         }
 
-        public void Unpack(string imagePath)
+        protected override void PackWork(string imagePath, string filePath, string destinationPath)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+
+        protected override void UnpackWork(string imagePath, string destinationPath)
+        {
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
     }
 }

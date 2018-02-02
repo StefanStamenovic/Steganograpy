@@ -9,6 +9,8 @@ using Alea.CSharp;
 using System.Collections;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Drawing.Imaging;
+using System.IO;
 
 namespace Steganography.Autocorrelation
 {
@@ -16,14 +18,20 @@ namespace Steganography.Autocorrelation
     {
         private int byteIndex;
 
-        public void Calculate(String imagePath, String compareImagePath)
-        { 
+        public AutocorrelationCPU(Form form)
+        {
+            mainForm = (MainForm)form;
+        }
+
+        protected override void CalculateWork(String imagePath, String compareImagePath)
+        {
+            mainForm.Enabled = false;
             try
             {
                 //Ucitavanje bitmapa
                 Bitmap bitmap = new Bitmap(imagePath);
                 Bitmap compareBitmap = new Bitmap(compareImagePath);
-                
+
                 //Alokacija niza bajtova
                 int arrayLevel = Convert.ToInt32(Math.Ceiling(Math.Log(bitmap.Width * 3, 2)));
                 int arrayWidth = Convert.ToInt32(Math.Pow(2, arrayLevel));
@@ -54,12 +62,20 @@ namespace Steganography.Autocorrelation
                         byteArrayOffImage[j] = ByteFromImage(compareBitmap);
                     CalcAutocorrelation(byteArrayOffImage).CopyTo(compareAutocor, byteArrayOffImage.Length * i);
                 }
-
-                int[] diff = imageAutocor;
-
-                for (int i = 0; i < imageAutocor.Length; i++)
-                    diff[i] -= compareAutocor[i];
-                    //diff[i] = Math.Abs(diff[i] - compareAutocor[i]);
+                int[] diff;
+                if (imageAutocor.Length <= compareAutocor.Length)
+                {
+                    diff = imageAutocor;
+                    for (int i = 0; i < imageAutocor.Length; i++)
+                        diff[i] -= compareAutocor[i];
+                }
+                else
+                {
+                    diff = compareAutocor;
+                    for (int i = 0; i < compareAutocor.Length; i++)
+                        diff[i] -= imageAutocor[i];
+                }
+              
 
 
                 Form chart = new Chart(diff);
@@ -72,6 +88,7 @@ namespace Steganography.Autocorrelation
             {
                 MessageBox.Show(ex.Message);
             }
+            mainForm.Enabled = true;
         }
         public int[] fwhd(int n , int[]  src)
         {

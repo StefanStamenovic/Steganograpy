@@ -51,14 +51,15 @@
             legend1.Position.Y = 9.222656F;
             this.Chart_Autocorrelation.Legends.Add(legend1);
             this.Chart_Autocorrelation.Location = new System.Drawing.Point(0, 0);
+            this.Chart_Autocorrelation.Margin = new System.Windows.Forms.Padding(4);
             this.Chart_Autocorrelation.Name = "Chart_Autocorrelation";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Area;
             series1.Legend = "Legend1";
             series1.Name = "Difference";
-            series1.YValuesPerPoint = 4;
+            series1.YValuesPerPoint = 32;
             this.Chart_Autocorrelation.Series.Add(series1);
-            this.Chart_Autocorrelation.Size = new System.Drawing.Size(809, 417);
+            this.Chart_Autocorrelation.Size = new System.Drawing.Size(1079, 513);
             this.Chart_Autocorrelation.TabIndex = 0;
             this.Chart_Autocorrelation.Text = "Autocorrelation";
             title1.Name = "Autocorrelation differences";
@@ -66,10 +67,11 @@
             // 
             // Chart
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(813, 419);
+            this.ClientSize = new System.Drawing.Size(1084, 516);
             this.Controls.Add(this.Chart_Autocorrelation);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Chart";
             this.Text = "Autocorrelation chart";
             ((System.ComponentModel.ISupportInitialize)(this.Chart_Autocorrelation)).EndInit();

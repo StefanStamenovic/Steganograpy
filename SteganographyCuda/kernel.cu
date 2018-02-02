@@ -166,7 +166,7 @@ extern "C" void _declspec(dllexport) _stdcall CUDA_BestDeviceInfo(
 		_val(device) = bestDeviceIndx;
 		strcpy(name, bestDeviceProp.name);
 		_val(capability_version) = (float)bestDeviceProp.major + (bestDeviceProp.minor) / 10.f;
-		_val(global_memory) = (int)bestDeviceProp.totalGlobalMem; 
+		_val(global_memory) = bestDeviceProp.totalGlobalMem / 1048576.0f;
 		_val(memory_clock_rate) = bestDeviceProp.memoryClockRate;
 		_val(L2_cash_size) = bestDeviceProp.l2CacheSize;
 		_val(memory_bus_width) = bestDeviceProp.memoryBusWidth;

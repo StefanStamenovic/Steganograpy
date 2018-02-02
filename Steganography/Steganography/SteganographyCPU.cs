@@ -8,13 +8,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Steganography
+namespace Steganography.Steganography
 {
     class SteganographyCPU : ISteganography
     {
-        private MainForm mainForm;
-        private Thread processingTherad;
-
         private int bitIndex;
 
         public SteganographyCPU(Form form)
@@ -22,32 +19,9 @@ namespace Steganography
             mainForm = (MainForm)form;
         }
 
-        ~SteganographyCPU()
+        protected override void PackWork(String imagePath, String filePath, String destinationPath)
         {
-            if (processingTherad != null)
-                processingTherad.Abort();
-        }
-
-        public void Pack(String imagePath, String filePath)
-        {
-            SaveFileDialog dialog = new SaveFileDialog();
-            String extension = Path.GetExtension(imagePath);
-            String destinationPath = null;
-            dialog.Filter = extension.TrimStart('.') + "|*" + extension;
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                destinationPath = dialog.FileName;
-            }
-            else
-                return;
-
-            processingTherad = new Thread(new ThreadStart(() => PackWork(imagePath, filePath, destinationPath)));
-            processingTherad.Name = "Packing thread";
-            processingTherad.Start();
-        }
-
-        private void PackWork(String imagePath, String filePath, String destinationPath)
-        {
+            this.mainForm.Enabled = false;
             try
             {
                 if (!File.Exists(imagePath))
@@ -89,12 +63,13 @@ namespace Steganography
                 dataFile.Close();
                 bitmap.Save(destinationPath);
                 bitmap.Dispose();
+                mainForm.PackFinished(destinationPath);
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
             }
-            mainForm.PackFinished(destinationPath);
+            this.mainForm.Enabled = true;
         }
 
         private void PackByteToImage(Bitmap bitmap, Byte data)
@@ -131,25 +106,9 @@ namespace Steganography
             }
         }
 
-        public void Unpack(String imagePath)
+        protected override void UnpackWork(String imagePath, String destinationPath)
         {
-            SaveFileDialog dialog = new SaveFileDialog();
-            String extension = Path.GetExtension(imagePath);
-            String destinationPath = null;
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                destinationPath = dialog.FileName;
-            }
-            else
-                return;
-
-            processingTherad = new Thread(new ThreadStart(() => UnpackWork(imagePath,destinationPath)));
-            processingTherad.Name = "Unpacking thread";
-            processingTherad.Start();
-        }
-
-        private void UnpackWork(String imagePath, String destinationPath)
-        {
+            this.mainForm.Enabled = false;
             try
             {
                 if (!File.Exists(imagePath))
@@ -184,13 +143,13 @@ namespace Steganography
 
                 outputFile.Close();
                 bitmap.Dispose();
+                mainForm.UnpackFinished();
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
             }
-
-            mainForm.UnpackFinished();
+            this.mainForm.Enabled = true;
         }
 
         private Byte UnpackByteFromImage(Bitmap bitmap)
@@ -224,7 +183,7 @@ namespace Steganography
             return result;
         }
 
-        public bool CheckIsImageHidingData(String imagePath)
+        public override bool CheckIsImageHidingData(String imagePath)
         {
             Byte[] code = new Byte[2];
             try

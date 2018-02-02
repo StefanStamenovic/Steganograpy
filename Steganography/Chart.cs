@@ -21,7 +21,6 @@ namespace Steganography
         public Chart(int[] dataSet)
         {
             InitializeComponent();
-
             for (int i = 0; i < dataSet.Length; i++)
                 Chart_Autocorrelation.Series[0].Points.AddY(dataSet[i]);
         }

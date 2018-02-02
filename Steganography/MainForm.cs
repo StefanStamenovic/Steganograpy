@@ -1,6 +1,7 @@
 ﻿using Steganography.Autocorrelation;
 using Steganography.Nvidia;
 using Steganography.Properties;
+using Steganography.Steganography;
 using System;
 using System.Drawing;
 using System.IO;
@@ -22,8 +23,9 @@ namespace Steganography
             Control.CheckForIllegalCrossThreadCalls = false;
 
             packer = new SteganographyCPU(this);
-            autocorrelation = new AutocorrelationCPU();
+            autocorrelation = new AutocorrelationCPU(this);
             enableCUDA = false;
+            UpdateCudaInfo();
 
             //Inicijalno je zakljucano biranje fajla jer ne postoji izabrana slika i pack dugmeta i unpack dugme je sakriveno
             this.FilePath_PackGroup.Enabled = false;
@@ -31,8 +33,6 @@ namespace Steganography
             this.Button_Pack.Enabled = false;
             this.Button_Unpack.Visible = false;
             this.GroupBox_UnpackInfo.Enabled = false;
-            if (CudaAPI.CheckIsCudaAvailable())
-                CudaAPI.SetBestDevice();
         }
 
         #region Buttons
@@ -165,6 +165,15 @@ namespace Steganography
         }
 
         //Chanege processsing to CUDA GPU
+        private void CheckBox_EnableCuda_CheckedChanged(object sender, EventArgs e)
+        {
+            this.enableCUDA = CheckBox_EnableCuda.Checked;
+            if (enableCUDA)
+                packer = new SteganographyGPU(this);
+            else
+                packer = new SteganographyCPU(this);
+            UpdateCudaInfo();
+        }
         #endregion
 
         #region UI update functions
@@ -197,6 +206,7 @@ namespace Steganography
 
         public void PackFinished(String afterImagePath)
         {
+            
             Image image = Image.FromStream(new MemoryStream(File.ReadAllBytes(afterImagePath)));
             this.Image_After.Image = image;
         }
@@ -204,6 +214,31 @@ namespace Steganography
         public void AutocorrelationFinished()
         {
 
+        }
+
+        public void UpdateCudaInfo()
+        {
+            if (CudaAPI.CheckIsCudaAvailable())
+            {
+                Cuda_ModeGrupBox.Enabled = true;
+                GrupBox_CudaGPUInfo.Enabled = true;
+                CudaAPI.SetBestDevice();
+                CudaName.Text = CudaAPI.Device.Name;
+                CudaDriverVersion.Text = CudaAPI.Device.DriverVersion.ToString();
+                CudaRuntimeVersion.Text = CudaAPI.Device.RuntimeVersion.ToString();
+                CudaCapabilityVersion.Text = CudaAPI.Device.CapabilityVersion.ToString("0.0");
+                CudaNumOfCores.Text = CudaAPI.Device.CudaCoresNum.ToString();
+                CudaClockRate.Text = (CudaAPI.Device.ClockRate / 1000).ToString() + "MHz";
+                CudaGlobalMem.Text = CudaAPI.Device.GlobalMemory.ToString() + "MB";
+                CudaMemClockRate.Text = (CudaAPI.Device.MemoryClockRate / 1000).ToString() + "MHz";
+                CudaMemBusWidth.Text = CudaAPI.Device.MemoryBusWidth.ToString() + "bit";
+                CudaL2CashSize.Text = (CudaAPI.Device.L2CashSize / 1024).ToString() + "KB";
+            }
+            else
+            {
+                Cuda_ModeGrupBox.Enabled = false;
+                GrupBox_CudaGPUInfo.Enabled = false;
+            }
         }
         #endregion
     }

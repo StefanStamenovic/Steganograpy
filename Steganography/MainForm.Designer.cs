@@ -71,11 +71,31 @@
             this.Button_Calculate = new System.Windows.Forms.Button();
             this.CompareImage_Autocorrelation = new System.Windows.Forms.PictureBox();
             this.Image_Autocorrelation = new System.Windows.Forms.PictureBox();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.Tab_Cuda = new System.Windows.Forms.TabPage();
+            this.Cuda_ModeGrupBox = new System.Windows.Forms.GroupBox();
+            this.Enable_CUDALabel = new System.Windows.Forms.Label();
+            this.CheckBox_EnableCuda = new System.Windows.Forms.CheckBox();
+            this.GrupBox_CudaGPUInfo = new System.Windows.Forms.GroupBox();
+            this.CudaClockRate = new System.Windows.Forms.Label();
+            this.Label_CudaClockRate = new System.Windows.Forms.Label();
+            this.CudaNumOfCores = new System.Windows.Forms.Label();
+            this.Label_CudaCoresNum = new System.Windows.Forms.Label();
+            this.CudaMemBusWidth = new System.Windows.Forms.Label();
+            this.Label_CudaMemBusWidth = new System.Windows.Forms.Label();
+            this.CudaL2CashSize = new System.Windows.Forms.Label();
+            this.Label_CudaL2 = new System.Windows.Forms.Label();
+            this.CudaMemClockRate = new System.Windows.Forms.Label();
+            this.Label_CudaMemClockRate = new System.Windows.Forms.Label();
+            this.CudaGlobalMem = new System.Windows.Forms.Label();
+            this.Label_CudaGlobalMemory = new System.Windows.Forms.Label();
+            this.CudaCapabilityVersion = new System.Windows.Forms.Label();
+            this.Label_CudaVersion = new System.Windows.Forms.Label();
+            this.CudaRuntimeVersion = new System.Windows.Forms.Label();
+            this.Label_CudaRunTimeDriver = new System.Windows.Forms.Label();
+            this.CudaDriverVersion = new System.Windows.Forms.Label();
+            this.CudaName = new System.Windows.Forms.Label();
+            this.Label_CudaDriver = new System.Windows.Forms.Label();
+            this.Label_CudaName = new System.Windows.Forms.Label();
             this.tab.SuspendLayout();
             this.tab_Pack.SuspendLayout();
             this.FilePath_PackGroup.SuspendLayout();
@@ -94,8 +114,9 @@
             this.ImagePath_AutocorrelationGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CompareImage_Autocorrelation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Image_Autocorrelation)).BeginInit();
-            this.tabPage1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.Tab_Cuda.SuspendLayout();
+            this.Cuda_ModeGrupBox.SuspendLayout();
+            this.GrupBox_CudaGPUInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // tab
@@ -103,7 +124,7 @@
             this.tab.Controls.Add(this.tab_Pack);
             this.tab.Controls.Add(this.tab_Unpack);
             this.tab.Controls.Add(this.tab_Autocorrelation);
-            this.tab.Controls.Add(this.tabPage1);
+            this.tab.Controls.Add(this.Tab_Cuda);
             this.tab.Location = new System.Drawing.Point(14, 12);
             this.tab.Name = "tab";
             this.tab.SelectedIndex = 0;
@@ -541,55 +562,286 @@
             this.Image_Autocorrelation.TabIndex = 17;
             this.Image_Autocorrelation.TabStop = false;
             // 
-            // tabPage1
+            // Tab_Cuda
             // 
-            this.tabPage1.Controls.Add(this.groupBox3);
-            this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 26);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(405, 516);
-            this.tabPage1.TabIndex = 3;
-            this.tabPage1.Text = "GPU";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.Tab_Cuda.Controls.Add(this.Cuda_ModeGrupBox);
+            this.Tab_Cuda.Controls.Add(this.GrupBox_CudaGPUInfo);
+            this.Tab_Cuda.Location = new System.Drawing.Point(4, 26);
+            this.Tab_Cuda.Name = "Tab_Cuda";
+            this.Tab_Cuda.Padding = new System.Windows.Forms.Padding(3);
+            this.Tab_Cuda.Size = new System.Drawing.Size(405, 516);
+            this.Tab_Cuda.TabIndex = 3;
+            this.Tab_Cuda.Text = "CUDA GPU";
+            this.Tab_Cuda.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // Cuda_ModeGrupBox
             // 
-            this.groupBox1.Location = new System.Drawing.Point(6, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(391, 229);
-            this.groupBox1.TabIndex = 24;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Graphic card info";
+            this.Cuda_ModeGrupBox.Controls.Add(this.Enable_CUDALabel);
+            this.Cuda_ModeGrupBox.Controls.Add(this.CheckBox_EnableCuda);
+            this.Cuda_ModeGrupBox.Location = new System.Drawing.Point(6, 6);
+            this.Cuda_ModeGrupBox.Name = "Cuda_ModeGrupBox";
+            this.Cuda_ModeGrupBox.Size = new System.Drawing.Size(390, 62);
+            this.Cuda_ModeGrupBox.TabIndex = 25;
+            this.Cuda_ModeGrupBox.TabStop = false;
+            this.Cuda_ModeGrupBox.Text = "CUDA GPU Mode";
             // 
-            // label1
+            // Enable_CUDALabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(106, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Enable CUDA:";
+            this.Enable_CUDALabel.AutoSize = true;
+            this.Enable_CUDALabel.Location = new System.Drawing.Point(6, 30);
+            this.Enable_CUDALabel.Name = "Enable_CUDALabel";
+            this.Enable_CUDALabel.Size = new System.Drawing.Size(106, 17);
+            this.Enable_CUDALabel.TabIndex = 0;
+            this.Enable_CUDALabel.Text = "Enable CUDA:";
             // 
-            // checkBox1
+            // CheckBox_EnableCuda
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(118, 31);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(18, 17);
-            this.checkBox1.TabIndex = 1;
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.CheckBox_EnableCuda.AutoSize = true;
+            this.CheckBox_EnableCuda.Location = new System.Drawing.Point(118, 31);
+            this.CheckBox_EnableCuda.Name = "CheckBox_EnableCuda";
+            this.CheckBox_EnableCuda.Size = new System.Drawing.Size(18, 17);
+            this.CheckBox_EnableCuda.TabIndex = 1;
+            this.CheckBox_EnableCuda.UseVisualStyleBackColor = true;
+            this.CheckBox_EnableCuda.CheckedChanged += new System.EventHandler(this.CheckBox_EnableCuda_CheckedChanged);
             // 
-            // groupBox3
+            // GrupBox_CudaGPUInfo
             // 
-            this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Controls.Add(this.checkBox1);
-            this.groupBox3.Location = new System.Drawing.Point(6, 241);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(390, 62);
-            this.groupBox3.TabIndex = 25;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "CUDA GPU Mode";
+            this.GrupBox_CudaGPUInfo.Controls.Add(this.CudaClockRate);
+            this.GrupBox_CudaGPUInfo.Controls.Add(this.Label_CudaClockRate);
+            this.GrupBox_CudaGPUInfo.Controls.Add(this.CudaNumOfCores);
+            this.GrupBox_CudaGPUInfo.Controls.Add(this.Label_CudaCoresNum);
+            this.GrupBox_CudaGPUInfo.Controls.Add(this.CudaMemBusWidth);
+            this.GrupBox_CudaGPUInfo.Controls.Add(this.Label_CudaMemBusWidth);
+            this.GrupBox_CudaGPUInfo.Controls.Add(this.CudaL2CashSize);
+            this.GrupBox_CudaGPUInfo.Controls.Add(this.Label_CudaL2);
+            this.GrupBox_CudaGPUInfo.Controls.Add(this.CudaMemClockRate);
+            this.GrupBox_CudaGPUInfo.Controls.Add(this.Label_CudaMemClockRate);
+            this.GrupBox_CudaGPUInfo.Controls.Add(this.CudaGlobalMem);
+            this.GrupBox_CudaGPUInfo.Controls.Add(this.Label_CudaGlobalMemory);
+            this.GrupBox_CudaGPUInfo.Controls.Add(this.CudaCapabilityVersion);
+            this.GrupBox_CudaGPUInfo.Controls.Add(this.Label_CudaVersion);
+            this.GrupBox_CudaGPUInfo.Controls.Add(this.CudaRuntimeVersion);
+            this.GrupBox_CudaGPUInfo.Controls.Add(this.Label_CudaRunTimeDriver);
+            this.GrupBox_CudaGPUInfo.Controls.Add(this.CudaDriverVersion);
+            this.GrupBox_CudaGPUInfo.Controls.Add(this.CudaName);
+            this.GrupBox_CudaGPUInfo.Controls.Add(this.Label_CudaDriver);
+            this.GrupBox_CudaGPUInfo.Controls.Add(this.Label_CudaName);
+            this.GrupBox_CudaGPUInfo.Location = new System.Drawing.Point(6, 74);
+            this.GrupBox_CudaGPUInfo.Name = "GrupBox_CudaGPUInfo";
+            this.GrupBox_CudaGPUInfo.Size = new System.Drawing.Size(391, 250);
+            this.GrupBox_CudaGPUInfo.TabIndex = 24;
+            this.GrupBox_CudaGPUInfo.TabStop = false;
+            this.GrupBox_CudaGPUInfo.Text = "Graphic card info";
+            // 
+            // CudaClockRate
+            // 
+            this.CudaClockRate.AutoEllipsis = true;
+            this.CudaClockRate.AutoSize = true;
+            this.CudaClockRate.Location = new System.Drawing.Point(237, 47);
+            this.CudaClockRate.MaximumSize = new System.Drawing.Size(200, 35);
+            this.CudaClockRate.Name = "CudaClockRate";
+            this.CudaClockRate.Size = new System.Drawing.Size(15, 17);
+            this.CudaClockRate.TabIndex = 0;
+            this.CudaClockRate.Text = "-";
+            // 
+            // Label_CudaClockRate
+            // 
+            this.Label_CudaClockRate.AutoSize = true;
+            this.Label_CudaClockRate.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label_CudaClockRate.Location = new System.Drawing.Point(237, 30);
+            this.Label_CudaClockRate.Name = "Label_CudaClockRate";
+            this.Label_CudaClockRate.Size = new System.Drawing.Size(119, 17);
+            this.Label_CudaClockRate.TabIndex = 0;
+            this.Label_CudaClockRate.Text = "Gpu clock rate";
+            // 
+            // CudaNumOfCores
+            // 
+            this.CudaNumOfCores.AutoEllipsis = true;
+            this.CudaNumOfCores.AutoSize = true;
+            this.CudaNumOfCores.Location = new System.Drawing.Point(10, 207);
+            this.CudaNumOfCores.MaximumSize = new System.Drawing.Size(200, 35);
+            this.CudaNumOfCores.Name = "CudaNumOfCores";
+            this.CudaNumOfCores.Size = new System.Drawing.Size(15, 17);
+            this.CudaNumOfCores.TabIndex = 0;
+            this.CudaNumOfCores.Text = "-";
+            // 
+            // Label_CudaCoresNum
+            // 
+            this.Label_CudaCoresNum.AutoSize = true;
+            this.Label_CudaCoresNum.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label_CudaCoresNum.Location = new System.Drawing.Point(10, 190);
+            this.Label_CudaCoresNum.Name = "Label_CudaCoresNum";
+            this.Label_CudaCoresNum.Size = new System.Drawing.Size(179, 17);
+            this.Label_CudaCoresNum.TabIndex = 0;
+            this.Label_CudaCoresNum.Text = "Number of cuda cores";
+            // 
+            // CudaMemBusWidth
+            // 
+            this.CudaMemBusWidth.AutoEllipsis = true;
+            this.CudaMemBusWidth.AutoSize = true;
+            this.CudaMemBusWidth.Location = new System.Drawing.Point(237, 167);
+            this.CudaMemBusWidth.MaximumSize = new System.Drawing.Size(200, 35);
+            this.CudaMemBusWidth.Name = "CudaMemBusWidth";
+            this.CudaMemBusWidth.Size = new System.Drawing.Size(15, 17);
+            this.CudaMemBusWidth.TabIndex = 0;
+            this.CudaMemBusWidth.Text = "-";
+            // 
+            // Label_CudaMemBusWidth
+            // 
+            this.Label_CudaMemBusWidth.AutoSize = true;
+            this.Label_CudaMemBusWidth.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label_CudaMemBusWidth.Location = new System.Drawing.Point(237, 150);
+            this.Label_CudaMemBusWidth.Name = "Label_CudaMemBusWidth";
+            this.Label_CudaMemBusWidth.Size = new System.Drawing.Size(152, 17);
+            this.Label_CudaMemBusWidth.TabIndex = 0;
+            this.Label_CudaMemBusWidth.Text = "Memory bus width";
+            // 
+            // CudaL2CashSize
+            // 
+            this.CudaL2CashSize.AutoEllipsis = true;
+            this.CudaL2CashSize.AutoSize = true;
+            this.CudaL2CashSize.Location = new System.Drawing.Point(237, 207);
+            this.CudaL2CashSize.MaximumSize = new System.Drawing.Size(200, 35);
+            this.CudaL2CashSize.Name = "CudaL2CashSize";
+            this.CudaL2CashSize.Size = new System.Drawing.Size(15, 17);
+            this.CudaL2CashSize.TabIndex = 0;
+            this.CudaL2CashSize.Text = "-";
+            // 
+            // Label_CudaL2
+            // 
+            this.Label_CudaL2.AutoSize = true;
+            this.Label_CudaL2.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label_CudaL2.Location = new System.Drawing.Point(237, 190);
+            this.Label_CudaL2.Name = "Label_CudaL2";
+            this.Label_CudaL2.Size = new System.Drawing.Size(101, 17);
+            this.Label_CudaL2.TabIndex = 0;
+            this.Label_CudaL2.Text = "L2 cash size";
+            // 
+            // CudaMemClockRate
+            // 
+            this.CudaMemClockRate.AutoEllipsis = true;
+            this.CudaMemClockRate.AutoSize = true;
+            this.CudaMemClockRate.Location = new System.Drawing.Point(237, 127);
+            this.CudaMemClockRate.MaximumSize = new System.Drawing.Size(200, 35);
+            this.CudaMemClockRate.Name = "CudaMemClockRate";
+            this.CudaMemClockRate.Size = new System.Drawing.Size(15, 17);
+            this.CudaMemClockRate.TabIndex = 0;
+            this.CudaMemClockRate.Text = "-";
+            // 
+            // Label_CudaMemClockRate
+            // 
+            this.Label_CudaMemClockRate.AutoSize = true;
+            this.Label_CudaMemClockRate.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label_CudaMemClockRate.Location = new System.Drawing.Point(237, 110);
+            this.Label_CudaMemClockRate.Name = "Label_CudaMemClockRate";
+            this.Label_CudaMemClockRate.Size = new System.Drawing.Size(150, 17);
+            this.Label_CudaMemClockRate.TabIndex = 0;
+            this.Label_CudaMemClockRate.Text = "Memory clock rate";
+            // 
+            // CudaGlobalMem
+            // 
+            this.CudaGlobalMem.AutoEllipsis = true;
+            this.CudaGlobalMem.AutoSize = true;
+            this.CudaGlobalMem.Location = new System.Drawing.Point(237, 87);
+            this.CudaGlobalMem.MaximumSize = new System.Drawing.Size(200, 35);
+            this.CudaGlobalMem.Name = "CudaGlobalMem";
+            this.CudaGlobalMem.Size = new System.Drawing.Size(15, 17);
+            this.CudaGlobalMem.TabIndex = 0;
+            this.CudaGlobalMem.Text = "-";
+            // 
+            // Label_CudaGlobalMemory
+            // 
+            this.Label_CudaGlobalMemory.AutoSize = true;
+            this.Label_CudaGlobalMemory.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label_CudaGlobalMemory.Location = new System.Drawing.Point(237, 70);
+            this.Label_CudaGlobalMemory.Name = "Label_CudaGlobalMemory";
+            this.Label_CudaGlobalMemory.Size = new System.Drawing.Size(124, 17);
+            this.Label_CudaGlobalMemory.TabIndex = 0;
+            this.Label_CudaGlobalMemory.Text = "Global memory";
+            // 
+            // CudaCapabilityVersion
+            // 
+            this.CudaCapabilityVersion.AutoEllipsis = true;
+            this.CudaCapabilityVersion.AutoSize = true;
+            this.CudaCapabilityVersion.Location = new System.Drawing.Point(10, 167);
+            this.CudaCapabilityVersion.MaximumSize = new System.Drawing.Size(200, 35);
+            this.CudaCapabilityVersion.Name = "CudaCapabilityVersion";
+            this.CudaCapabilityVersion.Size = new System.Drawing.Size(15, 17);
+            this.CudaCapabilityVersion.TabIndex = 0;
+            this.CudaCapabilityVersion.Text = "-";
+            // 
+            // Label_CudaVersion
+            // 
+            this.Label_CudaVersion.AutoSize = true;
+            this.Label_CudaVersion.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label_CudaVersion.Location = new System.Drawing.Point(10, 150);
+            this.Label_CudaVersion.Name = "Label_CudaVersion";
+            this.Label_CudaVersion.Size = new System.Drawing.Size(146, 17);
+            this.Label_CudaVersion.TabIndex = 0;
+            this.Label_CudaVersion.Text = "Capability version";
+            // 
+            // CudaRuntimeVersion
+            // 
+            this.CudaRuntimeVersion.AutoEllipsis = true;
+            this.CudaRuntimeVersion.AutoSize = true;
+            this.CudaRuntimeVersion.Location = new System.Drawing.Point(10, 127);
+            this.CudaRuntimeVersion.MaximumSize = new System.Drawing.Size(200, 35);
+            this.CudaRuntimeVersion.Name = "CudaRuntimeVersion";
+            this.CudaRuntimeVersion.Size = new System.Drawing.Size(15, 17);
+            this.CudaRuntimeVersion.TabIndex = 0;
+            this.CudaRuntimeVersion.Text = "-";
+            // 
+            // Label_CudaRunTimeDriver
+            // 
+            this.Label_CudaRunTimeDriver.AutoSize = true;
+            this.Label_CudaRunTimeDriver.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label_CudaRunTimeDriver.Location = new System.Drawing.Point(10, 110);
+            this.Label_CudaRunTimeDriver.Name = "Label_CudaRunTimeDriver";
+            this.Label_CudaRunTimeDriver.Size = new System.Drawing.Size(134, 17);
+            this.Label_CudaRunTimeDriver.TabIndex = 0;
+            this.Label_CudaRunTimeDriver.Text = "Runtime version";
+            // 
+            // CudaDriverVersion
+            // 
+            this.CudaDriverVersion.AutoEllipsis = true;
+            this.CudaDriverVersion.AutoSize = true;
+            this.CudaDriverVersion.Location = new System.Drawing.Point(10, 87);
+            this.CudaDriverVersion.MaximumSize = new System.Drawing.Size(200, 35);
+            this.CudaDriverVersion.Name = "CudaDriverVersion";
+            this.CudaDriverVersion.Size = new System.Drawing.Size(15, 17);
+            this.CudaDriverVersion.TabIndex = 0;
+            this.CudaDriverVersion.Text = "-";
+            // 
+            // CudaName
+            // 
+            this.CudaName.AutoEllipsis = true;
+            this.CudaName.AutoSize = true;
+            this.CudaName.Location = new System.Drawing.Point(10, 47);
+            this.CudaName.MaximumSize = new System.Drawing.Size(200, 35);
+            this.CudaName.Name = "CudaName";
+            this.CudaName.Size = new System.Drawing.Size(15, 17);
+            this.CudaName.TabIndex = 0;
+            this.CudaName.Text = "-";
+            // 
+            // Label_CudaDriver
+            // 
+            this.Label_CudaDriver.AutoSize = true;
+            this.Label_CudaDriver.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label_CudaDriver.Location = new System.Drawing.Point(10, 70);
+            this.Label_CudaDriver.Name = "Label_CudaDriver";
+            this.Label_CudaDriver.Size = new System.Drawing.Size(121, 17);
+            this.Label_CudaDriver.TabIndex = 0;
+            this.Label_CudaDriver.Text = "Driver verision";
+            // 
+            // Label_CudaName
+            // 
+            this.Label_CudaName.AutoSize = true;
+            this.Label_CudaName.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label_CudaName.Location = new System.Drawing.Point(10, 30);
+            this.Label_CudaName.Name = "Label_CudaName";
+            this.Label_CudaName.Size = new System.Drawing.Size(51, 17);
+            this.Label_CudaName.TabIndex = 0;
+            this.Label_CudaName.Text = "Name";
             // 
             // MainForm
             // 
@@ -629,9 +881,11 @@
             this.ImagePath_AutocorrelationGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CompareImage_Autocorrelation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Image_Autocorrelation)).EndInit();
-            this.tabPage1.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.Tab_Cuda.ResumeLayout(false);
+            this.Cuda_ModeGrupBox.ResumeLayout(false);
+            this.Cuda_ModeGrupBox.PerformLayout();
+            this.GrupBox_CudaGPUInfo.ResumeLayout(false);
+            this.GrupBox_CudaGPUInfo.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -680,11 +934,31 @@
         private System.Windows.Forms.GroupBox ImagePath_AutocorrelationGroup;
         private System.Windows.Forms.TextBox ImagePath_AutocorrelationTextBox;
         private System.Windows.Forms.Button ImagePath_AutocorrelationTextButton;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TabPage Tab_Cuda;
+        private System.Windows.Forms.GroupBox GrupBox_CudaGPUInfo;
+        private System.Windows.Forms.GroupBox Cuda_ModeGrupBox;
+        private System.Windows.Forms.Label Enable_CUDALabel;
+        private System.Windows.Forms.CheckBox CheckBox_EnableCuda;
+        private System.Windows.Forms.Label Label_CudaRunTimeDriver;
+        private System.Windows.Forms.Label Label_CudaDriver;
+        private System.Windows.Forms.Label Label_CudaName;
+        private System.Windows.Forms.Label Label_CudaClockRate;
+        private System.Windows.Forms.Label Label_CudaCoresNum;
+        private System.Windows.Forms.Label Label_CudaMemBusWidth;
+        private System.Windows.Forms.Label Label_CudaL2;
+        private System.Windows.Forms.Label Label_CudaMemClockRate;
+        private System.Windows.Forms.Label Label_CudaGlobalMemory;
+        private System.Windows.Forms.Label Label_CudaVersion;
+        private System.Windows.Forms.Label CudaClockRate;
+        private System.Windows.Forms.Label CudaNumOfCores;
+        private System.Windows.Forms.Label CudaMemBusWidth;
+        private System.Windows.Forms.Label CudaL2CashSize;
+        private System.Windows.Forms.Label CudaMemClockRate;
+        private System.Windows.Forms.Label CudaGlobalMem;
+        private System.Windows.Forms.Label CudaCapabilityVersion;
+        private System.Windows.Forms.Label CudaRuntimeVersion;
+        private System.Windows.Forms.Label CudaDriverVersion;
+        private System.Windows.Forms.Label CudaName;
     }
 }
 

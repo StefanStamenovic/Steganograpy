@@ -20,7 +20,7 @@ namespace Steganography.Nvidia
             }
             catch (Exception)
             {
-                throw new Exception(GetLastExceptionMessage());
+                return false;
             }
         }
 
