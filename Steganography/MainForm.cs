@@ -169,9 +169,15 @@ namespace Steganography
         {
             this.enableCUDA = CheckBox_EnableCuda.Checked;
             if (enableCUDA)
+            {
                 packer = new SteganographyGPU(this);
+                autocorrelation = new AutocorrelationGPU(this);
+            }
             else
+            {
                 packer = new SteganographyCPU(this);
+                autocorrelation = new AutocorrelationCPU(this);
+            }
             UpdateCudaInfo();
         }
         #endregion
@@ -232,7 +238,7 @@ namespace Steganography
                 CudaGlobalMem.Text = CudaAPI.Device.GlobalMemory.ToString() + "MB";
                 CudaMemClockRate.Text = (CudaAPI.Device.MemoryClockRate / 1000).ToString() + "MHz";
                 CudaMemBusWidth.Text = CudaAPI.Device.MemoryBusWidth.ToString() + "bit";
-                CudaL2CashSize.Text = (CudaAPI.Device.L2CashSize / 1024).ToString() + "KB";
+                CudaMultyProcessorsNum.Text = CudaAPI.Device.MultyprocessorsNum.ToString();
             }
             else
             {

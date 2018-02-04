@@ -36,11 +36,11 @@ namespace Steganography.Nvidia
                 float capability_version = 0;
                 int global_memory = 0;
                 int memory_clock_rate = 0;
-                int L2_cash_size = 0;
+                int multyprocessors_num = 0;
                 int memory_bus_width = 0;
                 int cuda_cores_num = 0;
                 int clock_rate = 0;
-                CUDA_BestDeviceInfo(ref index, name, ref driver_version, ref runtime_version, ref capability_version, ref global_memory, ref memory_clock_rate, ref L2_cash_size, ref memory_bus_width, ref cuda_cores_num, ref clock_rate);
+                CUDA_BestDeviceInfo(ref index, name, ref driver_version, ref runtime_version, ref capability_version, ref global_memory, ref memory_clock_rate, ref multyprocessors_num, ref memory_bus_width, ref cuda_cores_num, ref clock_rate);
                 return device = new CudaDeviceInfo
                 {
                     Index = index,
@@ -50,7 +50,7 @@ namespace Steganography.Nvidia
                     CapabilityVersion = capability_version,
                     GlobalMemory = global_memory,
                     MemoryClockRate = memory_clock_rate,
-                    L2CashSize = L2_cash_size,
+                    MultyprocessorsNum = multyprocessors_num,
                     MemoryBusWidth = memory_bus_width,
                     CudaCoresNum = cuda_cores_num,
                     ClockRate = clock_rate

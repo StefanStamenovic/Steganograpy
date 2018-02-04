@@ -82,8 +82,8 @@
             this.Label_CudaCoresNum = new System.Windows.Forms.Label();
             this.CudaMemBusWidth = new System.Windows.Forms.Label();
             this.Label_CudaMemBusWidth = new System.Windows.Forms.Label();
-            this.CudaL2CashSize = new System.Windows.Forms.Label();
-            this.Label_CudaL2 = new System.Windows.Forms.Label();
+            this.CudaMultyProcessorsNum = new System.Windows.Forms.Label();
+            this.Label_CudaMultyProcessorsNum = new System.Windows.Forms.Label();
             this.CudaMemClockRate = new System.Windows.Forms.Label();
             this.Label_CudaMemClockRate = new System.Windows.Forms.Label();
             this.CudaGlobalMem = new System.Windows.Forms.Label();
@@ -612,8 +612,8 @@
             this.GrupBox_CudaGPUInfo.Controls.Add(this.Label_CudaCoresNum);
             this.GrupBox_CudaGPUInfo.Controls.Add(this.CudaMemBusWidth);
             this.GrupBox_CudaGPUInfo.Controls.Add(this.Label_CudaMemBusWidth);
-            this.GrupBox_CudaGPUInfo.Controls.Add(this.CudaL2CashSize);
-            this.GrupBox_CudaGPUInfo.Controls.Add(this.Label_CudaL2);
+            this.GrupBox_CudaGPUInfo.Controls.Add(this.CudaMultyProcessorsNum);
+            this.GrupBox_CudaGPUInfo.Controls.Add(this.Label_CudaMultyProcessorsNum);
             this.GrupBox_CudaGPUInfo.Controls.Add(this.CudaMemClockRate);
             this.GrupBox_CudaGPUInfo.Controls.Add(this.Label_CudaMemClockRate);
             this.GrupBox_CudaGPUInfo.Controls.Add(this.CudaGlobalMem);
@@ -696,26 +696,26 @@
             this.Label_CudaMemBusWidth.TabIndex = 0;
             this.Label_CudaMemBusWidth.Text = "Memory bus width";
             // 
-            // CudaL2CashSize
+            // CudaMultyProcessorsNum
             // 
-            this.CudaL2CashSize.AutoEllipsis = true;
-            this.CudaL2CashSize.AutoSize = true;
-            this.CudaL2CashSize.Location = new System.Drawing.Point(237, 207);
-            this.CudaL2CashSize.MaximumSize = new System.Drawing.Size(200, 35);
-            this.CudaL2CashSize.Name = "CudaL2CashSize";
-            this.CudaL2CashSize.Size = new System.Drawing.Size(15, 17);
-            this.CudaL2CashSize.TabIndex = 0;
-            this.CudaL2CashSize.Text = "-";
+            this.CudaMultyProcessorsNum.AutoEllipsis = true;
+            this.CudaMultyProcessorsNum.AutoSize = true;
+            this.CudaMultyProcessorsNum.Location = new System.Drawing.Point(237, 207);
+            this.CudaMultyProcessorsNum.MaximumSize = new System.Drawing.Size(200, 35);
+            this.CudaMultyProcessorsNum.Name = "CudaMultyProcessorsNum";
+            this.CudaMultyProcessorsNum.Size = new System.Drawing.Size(15, 17);
+            this.CudaMultyProcessorsNum.TabIndex = 0;
+            this.CudaMultyProcessorsNum.Text = "-";
             // 
-            // Label_CudaL2
+            // Label_CudaMultyProcessorsNum
             // 
-            this.Label_CudaL2.AutoSize = true;
-            this.Label_CudaL2.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label_CudaL2.Location = new System.Drawing.Point(237, 190);
-            this.Label_CudaL2.Name = "Label_CudaL2";
-            this.Label_CudaL2.Size = new System.Drawing.Size(101, 17);
-            this.Label_CudaL2.TabIndex = 0;
-            this.Label_CudaL2.Text = "L2 cash size";
+            this.Label_CudaMultyProcessorsNum.AutoSize = true;
+            this.Label_CudaMultyProcessorsNum.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label_CudaMultyProcessorsNum.Location = new System.Drawing.Point(237, 190);
+            this.Label_CudaMultyProcessorsNum.Name = "Label_CudaMultyProcessorsNum";
+            this.Label_CudaMultyProcessorsNum.Size = new System.Drawing.Size(142, 17);
+            this.Label_CudaMultyProcessorsNum.TabIndex = 0;
+            this.Label_CudaMultyProcessorsNum.Text = "Processors count";
             // 
             // CudaMemClockRate
             // 
@@ -945,14 +945,14 @@
         private System.Windows.Forms.Label Label_CudaClockRate;
         private System.Windows.Forms.Label Label_CudaCoresNum;
         private System.Windows.Forms.Label Label_CudaMemBusWidth;
-        private System.Windows.Forms.Label Label_CudaL2;
+        private System.Windows.Forms.Label Label_CudaMultyProcessorsNum;
         private System.Windows.Forms.Label Label_CudaMemClockRate;
         private System.Windows.Forms.Label Label_CudaGlobalMemory;
         private System.Windows.Forms.Label Label_CudaVersion;
         private System.Windows.Forms.Label CudaClockRate;
         private System.Windows.Forms.Label CudaNumOfCores;
         private System.Windows.Forms.Label CudaMemBusWidth;
-        private System.Windows.Forms.Label CudaL2CashSize;
+        private System.Windows.Forms.Label CudaMultyProcessorsNum;
         private System.Windows.Forms.Label CudaMemClockRate;
         private System.Windows.Forms.Label CudaGlobalMem;
         private System.Windows.Forms.Label CudaCapabilityVersion;

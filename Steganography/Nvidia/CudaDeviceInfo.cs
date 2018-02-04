@@ -15,7 +15,7 @@ namespace Steganography.Nvidia
         public float CapabilityVersion { get; set; }
         public int GlobalMemory { get; set; }
         public int MemoryClockRate { get; set; }
-        public int L2CashSize { get; set; }
+        public int MultyprocessorsNum { get; set; }
         public int MemoryBusWidth { get; set; }
         public int CudaCoresNum { get; set; }
         public int ClockRate { get; set; }

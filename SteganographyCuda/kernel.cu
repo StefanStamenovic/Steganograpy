@@ -110,7 +110,7 @@ extern "C" void _declspec(dllexport) _stdcall CUDA_BestDeviceInfo(
 	float* capability_version,
 	int* global_memory,
 	int* memory_clock_rate,
-	int* L2_cash_size,
+	int* multyprocessors_num,
 	int* memory_bus_width,
 	int* cuda_cores_num,
 	int* clock_rate
@@ -168,7 +168,7 @@ extern "C" void _declspec(dllexport) _stdcall CUDA_BestDeviceInfo(
 		_val(capability_version) = (float)bestDeviceProp.major + (bestDeviceProp.minor) / 10.f;
 		_val(global_memory) = bestDeviceProp.totalGlobalMem / 1048576.0f;
 		_val(memory_clock_rate) = bestDeviceProp.memoryClockRate;
-		_val(L2_cash_size) = bestDeviceProp.l2CacheSize;
+		_val(multyprocessors_num) = bestDeviceProp.multiProcessorCount;
 		_val(memory_bus_width) = bestDeviceProp.memoryBusWidth;
 		_val(cuda_cores_num) = _ConvertSMVer2Cores(bestDeviceProp.major, bestDeviceProp.minor) * bestDeviceProp.multiProcessorCount;
 		_val(clock_rate) = bestDeviceProp.clockRate;
