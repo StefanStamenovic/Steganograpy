@@ -67,7 +67,56 @@ namespace Steganography.Nvidia
             Device = GetBestDeviceInfo();
         }
 
+        public static void CalculateAutoCorrelation(byte[] imageBytesOriginal, byte[] imageBytesPacked, int[] returnData)
+        {
+            if (Device == null)
+            {
+                throw new Exception("CUDA API not initialized!");
+            }
+            try
+            {
+                CUDA_CalculateAutoCorrelation(imageBytesOriginal, imageBytesOriginal.Length, imageBytesPacked, imageBytesPacked.Length, returnData);
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+
+        public static void PackBytes(byte[] imageBytes, byte[] fileBytes)
+        {
+            if (Device == null)
+            {
+                throw new Exception("CUDA API not initialized!");
+            }
+            try
+            {
+                CUDA_PackBytes(imageBytes, imageBytes.Length, fileBytes, fileBytes.Length);
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+
+        public static void UnpackBytes(byte[] imageBytes, byte[] fileBytes)
+        {
+            if (Device == null)
+            {
+                throw new Exception("CUDA API not initialized!");
+            }
+            try
+            {
+                CUDA_UnpackBytes(imageBytes, imageBytes.Length, fileBytes, fileBytes.Length);
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+
         #region DLL functions
+
         private static string GetLastExceptionMessage()
         {
             StringBuilder message = new StringBuilder(255);
@@ -95,6 +144,15 @@ namespace Steganography.Nvidia
             ref int cuda_cores_num,
             ref int clock_rate
         );
+
+        [DllImport("SteganographyCuda.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern void CUDA_CalculateAutoCorrelation(byte[] imageBytesOriginal, int imageBytesOriginalLength, byte[] imageBytesPacked, int imageBytesPackedLength, int[] returnData);
+
+        [DllImport("SteganographyCuda.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern void CUDA_PackBytes(byte[] imageBytes, int imageBytesLength, byte[] fileBytes, int fileBytesLength);
+
+        [DllImport("SteganographyCuda.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern void CUDA_UnpackBytes(byte[] imageBytes, int imageBytesLength, byte[] fileBytes, int fileBytesLength);
 
         #endregion
     }

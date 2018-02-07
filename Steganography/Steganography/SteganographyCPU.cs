@@ -88,8 +88,8 @@ namespace Steganography.Steganography
                 {
                     //R
                     case 0:
-                        Byte R = Convert.ToByte((((Convert.ToUInt32(pixel.R)) >> 1) << 1) | bitData);
-                        bitmap.SetPixel(x, y, Color.FromArgb(R, pixel.G, pixel.B));
+                        Byte B = Convert.ToByte((((Convert.ToUInt32(pixel.B)) >> 1) << 1) | bitData);
+                        bitmap.SetPixel(x, y, Color.FromArgb(pixel.R, pixel.G, B));
                         break;
                     //G
                     case 1:
@@ -98,8 +98,8 @@ namespace Steganography.Steganography
                         break;
                     //B
                     case 2:
-                        Byte B = Convert.ToByte((((Convert.ToUInt32(pixel.B)) >> 1) << 1) | bitData);
-                        bitmap.SetPixel(x, y, Color.FromArgb(pixel.R, pixel.G, B));
+                        Byte R = Convert.ToByte((((Convert.ToUInt32(pixel.R)) >> 1) << 1) | bitData);
+                        bitmap.SetPixel(x, y, Color.FromArgb(R, pixel.G, pixel.B));
                         break;
                 }
                 bitIndex++;
@@ -165,17 +165,17 @@ namespace Steganography.Steganography
                 //Ekstrakcija bitova
                 switch (bitIndex % 3)
                 {
-                    //R
+                    //B
                     case 0:
-                        result = Convert.ToByte(result | (((Convert.ToUInt32(pixel.R)) << 31) >> (24 + i)));
+                        result = Convert.ToByte(result | (((Convert.ToUInt32(pixel.B)) << 31) >> (24 + i)));
                         break;
                     //G
                     case 1:
                         result = Convert.ToByte(result | (((Convert.ToUInt32(pixel.G)) << 31) >> (24 + i)));
                         break;
-                    //B
+                    //R
                     case 2:
-                        result = Convert.ToByte(result | (((Convert.ToUInt32(pixel.B)) << 31) >> (24 + i)));
+                        result = Convert.ToByte(result | (((Convert.ToUInt32(pixel.R)) << 31) >> (24 + i)));
                         break;
                 }
                 bitIndex++;

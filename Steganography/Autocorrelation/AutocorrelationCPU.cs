@@ -11,6 +11,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Diagnostics;
 
 namespace Steganography.Autocorrelation
 {
@@ -75,8 +76,6 @@ namespace Steganography.Autocorrelation
                     for (int i = 0; i < compareAutocor.Length; i++)
                         diff[i] -= imageAutocor[i];
                 }
-              
-
 
                 Form chart = new Chart(diff);
                 DialogResult result = chart.ShowDialog();
@@ -141,17 +140,17 @@ namespace Steganography.Autocorrelation
                 //Ekstrakcija bitova
                 switch (byteIndex % 3)
                 {
-                    //R
+                    //B
                     case 0:
-                        result = Convert.ToByte(result | (((Convert.ToUInt32(pixel.R)) << 31) >> (24 + i)));
+                        result = Convert.ToByte(result | (((Convert.ToUInt32(pixel.B)) << 31) >> (24 + i)));
                         break;
                     //G
                     case 1:
                         result = Convert.ToByte(result | (((Convert.ToUInt32(pixel.G)) << 31) >> (24 + i)));
                         break;
-                    //B
+                    //R
                     case 2:
-                        result = Convert.ToByte(result | (((Convert.ToUInt32(pixel.B)) << 31) >> (24 + i)));
+                        result = Convert.ToByte(result | (((Convert.ToUInt32(pixel.R)) << 31) >> (24 + i)));
                         break;
                 }
             }
